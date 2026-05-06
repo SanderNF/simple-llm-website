@@ -8,8 +8,9 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 2.5vh;
             padding-bottom: 15vh;
+            padding-top: 8vh;
             background-color: #181818;
         }
         .loader {
@@ -68,6 +69,13 @@
             background-color: #333;
             color: whitesmoke;
         }
+        .newChat {
+            position: fixed; 
+            height: 5vh;
+            top: 0; 
+            left: 0;
+            margin: 1vh;
+        }
         img {
             width: 20vi;
             aspect-ratio: 1/1;
@@ -95,6 +103,7 @@
         <textarea name="body" id="newMessage" placeholder="body" ></textarea>
         <button onclick="newMessage()"><h2>Create New Message</h2></button>
     </div>
+    <button class="newChat" onclick="window.open('/new_chat');">New Chat</button>
 
 
     <script>
