@@ -5,7 +5,11 @@ import dataHandler
 from urllib.parse import unquote_plus
 
 
-def parseThought(chat):
+def parseThought(chat: list) -> list:
+    """parses the chat messages to separate thinking content from regular content and returns a new chat list with the thinking content marked with a "thinking" role
+
+        :param chat: the original chat messages as a list of dictionaries with "role" and "content" keys
+        :return: a new chat list with the thinking content marked with a "thinking" role"""
     chatOutput = []
     for message in chat:
         if message["role"] == "assistant" and message["content"].startswith("<think>") and message["content"].endswith("</think>"):
@@ -30,14 +34,14 @@ def home():
     return redirect("/new_chat")
 
 @app.route('/chat/<chatId>', methods=['GET', 'POST'])
-def index(chatId):
+def index(chatId: str):
     chat = dataHandler.read_file("chat.json")[chatId]
     chat = parseThought(chat)
     return render_template('chat.html', chat=chat, chatId=chatId)
 
 
 @app.route('/chat/<chatId>/new/<prompt>', methods=['GET', 'POST'])
-def new_message(chatId, prompt):
+def new_message(chatId: str, prompt: str):
     # Call the LLM function with the prompt
     chat = dataHandler.appendToChat(chatId, "user", unquote_plus(prompt))
     response = llm.main(chat, chatId)
