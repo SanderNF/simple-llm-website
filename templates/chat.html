@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 15vh;
+            background-color: #181818;
+        }
+        .loader {
+            color: whitesmoke;
+            text-align: center;
+            font-size: 8vi;
+            margin: 20px;
+        }
+        .loaderDiv {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .newMessageBox {
+            position: fixed; 
+            bottom: 0; 
+            left: 0;
+            width: 100vw;
+            height: 12vh;
+            display: flex; 
+            align-items: stretch;
+            justify-content: center;
+            padding: 1vh;
+        }
+        textarea {
+            width: 50%;
+            padding: 1vh;
+            font-size: 1.75vh;
+            margin: 0;
+            border-radius: 1vh;
+            border-color: #555;
+            border-style: solid;
+            border-width: 0.3vh;
+            background-color: #333;
+            color: whitesmoke;
+            resize: horizontal;
+        }
+        button {
+            padding: 1vh 2vh;
+            margin: 0px;
+            height: 100%;
+            margin-left: 0.5vh;
+            font-size: 1.5vh;
+            cursor: pointer;
+            border-radius: 1vh;
+            border-color: #555;
+            border-style: solid;
+            border-width: 0.3vh;
+            background-color: #333;
+            color: whitesmoke;
+        }
+        .thinking {
+            color: gray;
+            font-size: 10px;
+        }
+        .user {
+            color: #337dff;
+        }
+        .assistant {
+            color: #72ff72;
+        }
+    </style>
+</head>
+<body>
+    {% for message in chat %}
+        <div class="message {{ message.role }}">
+            {{ message.content }}
+        </div>
+    {% endfor %}
+
+    <div class="newMessageBox">
+        <textarea name="body" id="newMessage" placeholder="body" ></textarea>
+        <button onclick="newMessage()"><h2>Create New Message</h2></button>
+    </div>
+
+
+    <script>
+        function newMessage() {
+            let formData = new FormData();
+            const message = document.getElementById('newMessage').value
+            formData.append('message', message);
+            loaderDiv = document.createElement('div')
+            loader = document.createElement('h1')
+            loader.innerText = "Generating..."
+            loader.classList.add("loader")
+            loaderDiv.classList.add("loaderDiv")
+            loaderDiv.appendChild(loader)
+            document.body.appendChild(loaderDiv)
+            window.location.href = "/chat/{{ chatId }}/new/" + encodeURIComponent(message)
+        }
+    </script>
+</body>
+</html>
