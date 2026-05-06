@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>LLM Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
         .loader {
             color: whitesmoke;
             text-align: center;
-            font-size: 8vi;
+            font-size: 6vi;
             margin: 20px;
         }
         .loaderDiv {
@@ -26,6 +26,7 @@
             left: 0;
             background-color: rgba(0, 0, 0, 0.5);
             display: flex;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
         }
@@ -67,6 +68,10 @@
             background-color: #333;
             color: whitesmoke;
         }
+        img {
+            width: 20vi;
+            aspect-ratio: 1/1;
+        }
         .thinking {
             color: gray;
             font-size: 10px;
@@ -99,10 +104,13 @@
             formData.append('message', message);
             loaderDiv = document.createElement('div')
             loader = document.createElement('h1')
+            loaderImg = document.createElement('img')
+            loaderImg.src = "{{ url_for('static', filename='/loader.gif') }}"
             loader.innerText = "Generating..."
             loader.classList.add("loader")
             loaderDiv.classList.add("loaderDiv")
             loaderDiv.appendChild(loader)
+            loaderDiv.appendChild(loaderImg)
             document.body.appendChild(loaderDiv)
             window.location.href = "/chat/{{ chatId }}/new/" + encodeURIComponent(message)
         }
