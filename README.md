@@ -1,2 +1,10 @@
-this is a simple LLM website that allows users to have conversations with a language model. The website is built using Flask for the backend and HTML/CSS/JavaScript for the frontend. The conversations are stored in a JSON file and each conversation is identified by a unique chat identifier. The chat identifier is generated using a linear congruential generator (LCG) to ensure uniqueness. The LLM function takes the chat messages as input and generates a response, which is then appended to the conversation in the JSON file. The frontend allows users to start new conversations and view existing conversations.
+## this is a simple LLM website that allows users to have conversations with a language model. 
+The website is built using Flask for the backend and HTML/CSS/JavaScript for the frontend. The conversations are stored in a JSON file and each conversation is identified by a unique chat identifier. The chat identifier is generated using a linear congruential generator (LCG) to ensure uniqueness. The LLM function takes the chat messages as input and generates a response, which is then appended to the conversation in the JSON file. The frontend allows users to start new conversations and view existing conversations.
 
+
+## picture of the website interface showing a conversation with the LLM
+example conversation:
+![example conversation](./pictures/conversation.png)
+
+loading screen when a new message is being processed:
+![loading screen](./pictures/loading-screen.png)
